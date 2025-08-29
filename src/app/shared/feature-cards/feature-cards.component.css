@@ -1,0 +1,304 @@
+/* Feature Cards - Estilos modernos para tarjetas reutilizables */
+
+/* Animaciones base */
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes icon-bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Estados de las tarjetas */
+.card-enter {
+  animation: card-enter 0.6s ease-out;
+}
+
+.card-enter-stagger {
+  animation: card-enter 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+/* Delays para animación escalonada */
+.card-enter-stagger:nth-child(1) { animation-delay: 0.1s; }
+.card-enter-stagger:nth-child(2) { animation-delay: 0.2s; }
+.card-enter-stagger:nth-child(3) { animation-delay: 0.3s; }
+.card-enter-stagger:nth-child(4) { animation-delay: 0.4s; }
+.card-enter-stagger:nth-child(5) { animation-delay: 0.5s; }
+.card-enter-stagger:nth-child(6) { animation-delay: 0.6s; }
+
+/* Efectos hover mejorados */
+.group:hover .icon-container {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+}
+
+.group:hover .card-icon {
+  animation: icon-bounce 0.6s ease;
+}
+
+/* Efectos glassmorphism para variante glass */
+.glass-card {
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-card {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass-card:hover {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Efectos de gradiente para variante gradient */
+.gradient-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.gradient-card:hover::before {
+  left: 100%;
+}
+
+/* Efectos de sombra mejorados */
+.modern-shadow {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.modern-shadow:hover {
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Efectos de borde animados */
+.animated-border {
+  position: relative;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(45deg, transparent 33%, #3b82f6 34%, #8b5cf6 66%, transparent 67%) border-box;
+  border: 2px solid transparent;
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+  border-radius: inherit;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s;
+}
+
+.animated-border:hover::before {
+  opacity: 1;
+}
+
+/* Loading states */
+.card-loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.dark .card-loading {
+  background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+  background-size: 200% 100%;
+}
+
+/* Mejoras de accesibilidad */
+.card-focus:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.card-focus:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .card-mobile {
+    padding: 1rem;
+  }
+  
+  .card-mobile .card-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .card-mobile .card-title {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-tablet {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Mejoras para reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .card-enter,
+  .card-enter-stagger,
+  .group:hover .card-icon {
+    animation: none !important;
+  }
+  
+  .transition-all,
+  .transition-transform,
+  .transition-colors {
+    transition: none !important;
+  }
+}
+
+/* Efectos de partículas para hover */
+.particle-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.particle-effect::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+  pointer-events: none;
+}
+
+.particle-effect:hover::after {
+  width: 200px;
+  height: 200px;
+}
+
+/* Efectos de elevación suave */
+.elevation-hover {
+  transform: translateZ(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.elevation-hover:hover {
+  transform: translateY(-8px) translateZ(0);
+}
+
+/* Bordes redondeados mejorados */
+.rounded-modern {
+  border-radius: 1.5rem;
+}
+
+.rounded-modern-lg {
+  border-radius: 2rem;
+}
+
+/* Efectos de texto mejorados */
+.text-shimmer {
+  background: linear-gradient(90deg, #374151, #6b7280, #374151);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2s infinite;
+}
+
+/* Estados activos */
+.card-active {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.05));
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Optimizaciones de rendimiento */
+.card-optimized {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Efectos de escala progresiva */
+.scale-on-hover {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.scale-on-hover:hover {
+  transform: scale(1.05);
+}
+
+/* Colores personalizados para badges */
+.badge-glow-blue {
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.badge-glow-purple {
+  box-shadow: 0 0 10px rgba(147, 51, 234, 0.3);
+}
+
+.badge-glow-green {
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.badge-glow-orange {
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
+.badge-glow-pink {
+  box-shadow: 0 0 10px rgba(236, 72, 153, 0.3);
+}
+
+.badge-glow-indigo {
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+}

@@ -1,0 +1,358 @@
+<!-- Navbar fijo con diseño moderno y efectos glassmorphism -->
+<nav
+  class="fixed top-0 left-0 w-full backdrop-blur-md bg-white/90 dark:bg-gray-900/90 shadow-lg shadow-black/5 z-50 transition-all duration-300 border-b border-white/20"
+  [class.navbar-scrolled]="isScrolled"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 lg:h-18">
+      <!-- Logo y nombre con efectos hover mejorados -->
+      <div class="flex items-center">
+        <a routerLink="/" class="flex-shrink-0 flex items-center group transition-all duration-300 hover:scale-105">
+          <!-- Logo desde la configuración -->
+          <div class="relative">
+            <img 
+              *ngIf="logoUrl" 
+              [src]="logoUrl" 
+              alt="Logo" 
+              class="h-8 w-auto lg:h-10 transition-all duration-300 group-hover:drop-shadow-lg" 
+            />
+            <!-- Icono por defecto si no hay logo -->
+            <div 
+              *ngIf="!logoUrl"
+              class="relative h-8 w-8 lg:h-10 lg:w-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:shadow-blue-500/25"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 lg:h-6 lg:w-6 text-white"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+          <span class="ml-3 text-xl lg:text-2xl font-bold bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent dark:from-white dark:via-blue-100 dark:to-purple-100 transition-all duration-300">
+            {{ nombreSitio }}
+          </span>
+        </a>
+      </div>
+
+      <!-- Menú principal con efectos modernos -->
+      <div class="hidden md:ml-6 md:flex md:items-center md:space-x-1 lg:space-x-2">
+        <a
+          routerLink="/"
+          routerLinkActive="active-link"
+          class="relative px-4 py-2 rounded-xl text-sm lg:text-base font-medium transition-all duration-300 hover:bg-white/50 dark:hover:bg-white/10 hover:shadow-lg hover:shadow-black/5 hover:scale-105 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+          >
+          <span class="relative z-10">Inicio</span>
+        </a>
+        <a
+          routerLink="/about"
+          routerLinkActive="active-link"
+          class="relative px-4 py-2 rounded-xl text-sm lg:text-base font-medium transition-all duration-300 hover:bg-white/50 dark:hover:bg-white/10 hover:shadow-lg hover:shadow-black/5 hover:scale-105 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+          >
+          <span class="relative z-10">Nosotros</span>
+        </a>
+        <a
+          routerLink="/servicios"
+          routerLinkActive="active-link"
+          class="relative px-4 py-2 rounded-xl text-sm lg:text-base font-medium transition-all duration-300 hover:bg-white/50 dark:hover:bg-white/10 hover:shadow-lg hover:shadow-black/5 hover:scale-105 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+          >
+          <span class="relative z-10">Servicios</span>
+        </a>
+        <a
+          routerLink="/galeria"
+          routerLinkActive="active-link"
+          class="relative px-4 py-2 rounded-xl text-sm lg:text-base font-medium transition-all duration-300 hover:bg-white/50 dark:hover:bg-white/10 hover:shadow-lg hover:shadow-black/5 hover:scale-105 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+          >
+          <span class="relative z-10">Catálogo</span>
+        </a>
+        <a
+          routerLink="/blog"
+          routerLinkActive="active-link"
+          class="relative px-4 py-2 rounded-xl text-sm lg:text-base font-medium transition-all duration-300 hover:bg-white/50 dark:hover:bg-white/10 hover:shadow-lg hover:shadow-black/5 hover:scale-105 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+          >
+          <span class="relative z-10">Blog</span>
+        </a>
+        <a
+          routerLink="/contacto"
+          routerLinkActive="active-link"
+          class="relative px-4 py-2 rounded-xl text-sm lg:text-base font-medium transition-all duration-300 hover:bg-white/50 dark:hover:bg-white/10 hover:shadow-lg hover:shadow-black/5 hover:scale-105 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+          >
+          <span class="relative z-10">Contacto</span>
+        </a>
+
+      </div>
+
+      <!-- Botones de acción modernos -->
+      <div class="hidden md:flex items-center space-x-3">
+        <!-- Botón de cambio de tema -->
+        <app-theme-toggle></app-theme-toggle>
+
+        <!-- Botón CTA principal -->
+        <a
+          routerLink="/contacto"
+          class="relative px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105 hover:-translate-y-0.5"
+        >
+          <span class="relative z-10">Comenzar Proyecto</span>
+          <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
+        </a>
+
+        <!-- Botón de acceso para usuarios no autenticados -->
+        <button
+          *ngIf="!currentUser"
+          routerLink="/auth/login"
+          class="relative px-5 py-2.5 border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-white/10 hover:shadow-lg hover:shadow-black/5"
+        >
+          <span class="relative z-10">Acceder</span>
+        </button>
+
+        <!-- Menú de usuario moderno para usuarios autenticados -->
+        <div *ngIf="currentUser" class="relative">
+          <button
+            (click)="toggleUserMenu($event)"
+            class="flex items-center text-sm rounded-xl focus:outline-none transition-all duration-300 hover:scale-105"
+          >
+            <div
+              class="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white shadow-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </button>
+
+          <!-- Menú desplegable moderno de usuario -->
+          <div
+            *ngIf="userMenuOpen"
+            class="absolute right-0 mt-3 w-56 py-2 backdrop-blur-md bg-white/90 dark:bg-gray-800/90 rounded-2xl shadow-xl shadow-black/10 border border-white/20 z-50 animate-in slide-in-from-top-2 duration-200"
+          >
+            <!-- Información del usuario -->
+            <div class="px-4 py-3 border-b border-gray-200/50 dark:border-gray-600/50">
+              <div class="text-sm font-semibold text-gray-900 dark:text-white">
+                {{ currentUser.name }}
+              </div>
+              <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                {{ currentUser.email }}
+              </div>
+            </div>
+
+            <!-- Enlaces del menú con iconos -->
+            <div class="py-2">
+              <a
+                routerLink="/cuenta"
+                class="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+                role="menuitem"
+              >
+                <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                Mi Cuenta
+              </a>
+              <a
+                routerLink="/favoritos"
+                class="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+                role="menuitem"
+              >
+                <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                Mis Favoritos
+              </a>
+              
+              <hr class="my-2 border-gray-200/50 dark:border-gray-600/50">
+              
+              <!-- Botón para cerrar sesión -->
+              <a
+                routerLink="/auth/login"
+                (click)="handleLogout($event)"
+                class="flex items-center px-4 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-700 dark:hover:text-red-300 transition-colors duration-200"
+                role="menuitem"
+              >
+                <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                </svg>
+                Cerrar Sesión
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón del menú móvil moderno -->
+      <div class="flex items-center md:hidden space-x-2">
+        <!-- Botón de tema para móvil -->
+        <app-theme-toggle></app-theme-toggle>
+        
+        <button
+          type="button"
+          (click)="toggleMobileMenu()"
+          class="relative inline-flex items-center justify-center p-2.5 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 focus:outline-none transition-all duration-300 hover:scale-105"
+          [class.menu-open]="mobileMenuOpen"
+        >
+          <!-- Hamburger animado -->
+          <div class="w-6 h-6 flex flex-col justify-center space-y-1.5">
+            <span class="w-6 h-0.5 bg-gray-700 dark:bg-gray-300 rounded-full transition-all duration-300 origin-center" 
+                  [class.rotate-45]="mobileMenuOpen" 
+                  [class.translate-y-2]="mobileMenuOpen"></span>
+            <span class="w-6 h-0.5 bg-gray-700 dark:bg-gray-300 rounded-full transition-all duration-300" 
+                  [class.opacity-0]="mobileMenuOpen"></span>
+            <span class="w-6 h-0.5 bg-gray-700 dark:bg-gray-300 rounded-full transition-all duration-300 origin-center" 
+                  [class.-rotate-45]="mobileMenuOpen" 
+                  [class.-translate-y-2]="mobileMenuOpen"></span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menú móvil moderno con animación -->
+  <div
+    class="md:hidden overflow-hidden transition-all duration-300 backdrop-blur-md bg-white/95 dark:bg-gray-900/95 border-t border-white/20"
+    [ngClass]="{ 'max-h-0 opacity-0': !mobileMenuOpen, 'max-h-96 opacity-100': mobileMenuOpen }"
+  >
+    <div class="px-2 pt-2 pb-4 space-y-1">
+      <!-- Enlaces de navegación móvil -->
+      <a
+        routerLink="/"
+        routerLinkActive="mobile-active-link"
+        (click)="mobileMenuOpen = false"
+        class="block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400"
+        >Inicio</a
+      >
+      <a
+        routerLink="/about"
+        routerLinkActive="mobile-active-link"
+        (click)="mobileMenuOpen = false"
+        class="block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400"
+        >Nosotros</a
+      >
+      <a
+        routerLink="/servicios"
+        routerLinkActive="mobile-active-link"
+        (click)="mobileMenuOpen = false"
+        class="block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400"
+        >Servicios</a
+      >
+      <a
+        routerLink="/galeria"
+        routerLinkActive="mobile-active-link"
+        (click)="mobileMenuOpen = false"
+        class="block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400"
+        >Catálogo</a
+      >
+      <a
+        routerLink="/blog"
+        routerLinkActive="mobile-active-link"
+        (click)="mobileMenuOpen = false"
+        class="block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400"
+        >Blog</a
+      >
+      <a
+        routerLink="/contacto"
+        routerLinkActive="mobile-active-link"
+        (click)="mobileMenuOpen = false"
+        class="block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400"
+        >Contacto</a
+      >
+
+      <!-- Separador -->
+      <hr class="my-4 border-gray-200/50 dark:border-gray-600/50">
+
+      <!-- Botones de acción móvil -->
+      <div class="space-y-3 px-2">
+        <!-- CTA principal móvil -->
+        <a
+          routerLink="/contacto"
+          (click)="mobileMenuOpen = false"
+          class="block w-full text-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/25 transition-all duration-300"
+        >
+          Comenzar Proyecto
+        </a>
+
+        <!-- Botón de acceso para usuarios no autenticados -->
+        <button
+          *ngIf="!currentUser"
+          routerLink="/auth/login"
+          (click)="mobileMenuOpen = false"
+          class="block w-full text-center px-6 py-3 border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-white/10"
+        >
+          Acceder
+        </button>
+
+        <!-- Sección de usuario autenticado -->
+        <div *ngIf="currentUser" class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 space-y-3">
+          <div class="flex items-center space-x-3">
+            <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-gray-900 dark:text-white">{{ currentUser.name }}</div>
+              <div class="text-xs text-gray-500 dark:text-gray-400">{{ currentUser.email }}</div>
+            </div>
+          </div>
+          
+          <div class="space-y-2">
+            <a
+              routerLink="/cuenta"
+              (click)="mobileMenuOpen = false"
+              class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors duration-200"
+            >
+              <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+              Mi Cuenta
+            </a>
+            <a
+              routerLink="/favoritos"
+              (click)="mobileMenuOpen = false"
+              class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors duration-200"
+            >
+              <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+              Mis Favoritos
+            </a>
+            <a
+              routerLink="/auth/login"
+              (click)="handleLogout($event); mobileMenuOpen = false"
+              class="flex items-center px-3 py-2 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-700 dark:hover:text-red-300 rounded-lg transition-colors duration-200"
+            >
+              <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+              </svg>
+              Cerrar Sesión
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Espacio para evitar que el contenido quede debajo del navbar fijo -->
+<div class="h-16"></div>
+
+<!-- Estilo global para el navbar -->
+<style>
+  :root {
+    --color-primario: {{ colorPrimario }};
+    --color-texto: {{ colorTexto }};
+    --color-enlaces: {{ colorEnlaces }};
+  }
+</style>

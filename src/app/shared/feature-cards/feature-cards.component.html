@@ -1,0 +1,120 @@
+<!-- Feature Cards Component - Sistema reutilizable de tarjetas -->
+<div [ngClass]="getGridClasses()">
+  <div 
+    *ngFor="let card of cards; trackBy: trackByFn"
+    [ngClass]="getCardClasses(card)"
+    [routerLink]="card.link || null"
+    role="article"
+    [attr.aria-label]="card.title"
+  >
+    <!-- Badge opcional -->
+    <div *ngIf="card.badge" class="mb-4">
+      <span [ngClass]="getBadgeClasses(card)">
+        {{ card.badge }}
+      </span>
+    </div>
+
+    <!-- Imagen opcional -->
+    <div *ngIf="card.image && !card.imageError" class="mb-4 overflow-hidden rounded-lg">
+      <img 
+        [src]="card.image" 
+        [alt]="card.title"
+        class="w-full h-32 object-cover transition-transform duration-300 group-hover:scale-110"
+        loading="lazy"
+        (error)="onImageError(card)"
+      >
+    </div>
+
+    <!-- Icono (solo si no hay imagen o hay error de imagen) -->
+    <div *ngIf="!card.image || card.imageError" class="mb-4 flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 group-hover:from-blue-50 group-hover:to-purple-50 dark:group-hover:from-blue-900/30 dark:group-hover:to-purple-900/30 transition-all duration-300">
+      <!-- Icono SVG dinámico -->
+      <ng-container [ngSwitch]="card.icon">
+        <!-- Desarrollo Web -->
+        <svg *ngSwitchCase="'code'" [ngClass]="getIconClasses(card)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+        </svg>
+
+        <!-- Diseño -->
+        <svg *ngSwitchCase="'palette'" [ngClass]="getIconClasses(card)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM7 3H5a2 2 0 00-2 2v12a4 4 0 004 4h2a2 2 0 002-2V5a2 2 0 00-2-2z"></path>
+        </svg>
+
+        <!-- Marketing -->
+        <svg *ngSwitchCase="'trending-up'" [ngClass]="getIconClasses(card)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+        </svg>
+
+        <!-- Móvil -->
+        <svg *ngSwitchCase="'smartphone'" [ngClass]="getIconClasses(card)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z"></path>
+        </svg>
+
+        <!-- Seguridad -->
+        <svg *ngSwitchCase="'shield'" [ngClass]="getIconClasses(card)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+        </svg>
+
+        <!-- Velocidad -->
+        <svg *ngSwitchCase="'lightning-bolt'" [ngClass]="getIconClasses(card)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        </svg>
+
+        <!-- Configuración -->
+        <svg *ngSwitchCase="'cog'" [ngClass]="getIconClasses(card)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+
+        <!-- Analytics -->
+        <svg *ngSwitchCase="'chart-bar'" [ngClass]="getIconClasses(card)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+        </svg>
+
+        <!-- Soporte -->
+        <svg *ngSwitchCase="'support'" [ngClass]="getIconClasses(card)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+
+        <!-- Default/Star -->
+        <svg *ngSwitchDefault [ngClass]="getIconClasses(card)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+        </svg>
+      </ng-container>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="text-center">
+      <!-- Título -->
+      <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+        {{ card.title }}
+      </h3>
+
+      <!-- Descripción -->
+      <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+        {{ card.description }}
+      </p>
+
+      <!-- Features opcionales -->
+      <div *ngIf="card.features && card.features.length > 0" class="space-y-2">
+        <div 
+          *ngFor="let feature of card.features" 
+          class="flex items-center justify-center text-sm text-gray-500 dark:text-gray-400"
+        >
+          <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          {{ feature }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrow indicator para enlaces -->
+    <div *ngIf="card.link" class="mt-6 flex justify-center">
+      <div class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 transition-all duration-300">
+        <svg class="w-4 h-4 text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 transform group-hover:translate-x-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+<!-- Hero Section con efectos modernos y parallax -->
+<section 
+  #heroContainer
+  class="relative min-h-screen flex items-center justify-center overflow-hidden"
+  [style.transform]="'translateY(' + (scrollY * 0.5) + 'px)'"
+>
+  <!-- Background con overlay gradiente -->
+  <div class="absolute inset-0 z-0">
+    <!-- Video o imagen de fondo -->
+    <div 
+      class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 scale-110"
+      [style.background-image]="heroData?.backgroundImage ? 'url(' + heroData?.backgroundImage + ')' : 'url(https://images.unsplash.com/1920x1080/?technology,business,abstract)'"
+      [style.transform]="'translateY(' + (scrollY * -0.3) + 'px) scale(1.1)'"
+    ></div>
+    
+    <!-- Overlay con gradientes múltiples -->
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-purple-900/70 to-indigo-900/80"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+    
+    <!-- Efectos de partículas (CSS) -->
+    <div class="absolute inset-0">
+      <div class="particles-container">
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+        <div class="particle particle-4"></div>
+        <div class="particle particle-5"></div>
+        <div class="particle particle-6"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div 
+      class="transition-all duration-1000 ease-out"
+      [class.opacity-100]="isVisible"
+      [class.translate-y-0]="isVisible"
+      [class.opacity-0]="!isVisible"
+      [class.translate-y-8]="!isVisible"
+    >
+      <!-- Badge o etiqueta superior -->
+      <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-medium mb-6 animate-fade-in-up delay-100">
+        <svg class="w-4 h-4 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        Disponibles para nuevos proyectos
+      </div>
+
+      <!-- Título principal con efecto gradiente -->
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight animate-fade-in-up delay-200">
+        <span class="block text-white mb-2">
+          {{ heroData?.title || 'Impulsa tu Negocio' }}
+        </span>
+        <span class="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-x">
+          con Tecnología de Vanguardia
+        </span>
+      </h1>
+
+      <!-- Subtítulo -->
+      <div class="text-xl sm:text-2xl lg:text-3xl text-blue-200 font-light mb-4 animate-fade-in-up delay-300">
+        {{ heroData?.subtitle || 'Desarrollo Web | Apps Móviles | Consultoría IT' }}
+      </div>
+
+      <!-- Descripción -->
+      <p class="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-in-up delay-400">
+        {{ heroData?.description || 'Creamos soluciones digitales que transforman ideas en realidad. Desde sitios web modernos hasta aplicaciones móviles innovadoras.' }}
+      </p>
+
+      <!-- Botones de acción -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up delay-500">
+        <!-- CTA Principal -->
+        <a
+          [routerLink]="heroData?.ctaLink || '/contacto'"
+          class="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-2xl shadow-2xl shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 hover:-translate-y-1 min-w-[200px]"
+        >
+          <span class="relative z-10 flex items-center justify-center">
+            {{ heroData?.ctaText || 'Comenzar Proyecto' }}
+            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </span>
+          <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+        </a>
+
+        <!-- CTA Secundario -->
+        <a
+          [routerLink]="heroData?.secondaryCtaLink || '/galeria'"
+          class="group px-8 py-4 border-2 border-white/30 hover:border-white/60 text-white hover:bg-white/10 font-semibold rounded-2xl backdrop-blur-sm transition-all duration-300 hover:scale-105 min-w-[200px] flex items-center justify-center"
+        >
+          {{ heroData?.secondaryCtaText || 'Ver Catálogo' }}
+          <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Estadísticas rápidas -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-16 animate-fade-in-up delay-600">
+        <div class="text-center">
+          <div class="text-3xl lg:text-4xl font-bold text-white mb-2 counter" data-target="150">150+</div>
+          <div class="text-white/70">Proyectos</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl lg:text-4xl font-bold text-white mb-2 counter" data-target="98">98%</div>
+          <div class="text-white/70">Satisfacción</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl lg:text-4xl font-bold text-white mb-2 counter" data-target="8">8+</div>
+          <div class="text-white/70">Años</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl lg:text-4xl font-bold text-white mb-2 counter" data-target="25">25+</div>
+          <div class="text-white/70">Especialistas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+    <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+      <div class="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+    </div>
+  </div>
+
+  <!-- Formas geométricas decorativas -->
+  <div class="absolute top-20 left-10 w-20 h-20 border border-white/20 rounded-full animate-pulse delay-1000"></div>
+  <div class="absolute top-40 right-20 w-16 h-16 bg-gradient-to-r from-blue-400 to-purple-400 rounded-lg rotate-45 animate-pulse delay-1500"></div>
+  <div class="absolute bottom-40 left-20 w-12 h-12 border-2 border-white/20 rotate-45 animate-pulse delay-2000"></div>
+</section>

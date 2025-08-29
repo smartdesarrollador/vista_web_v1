@@ -1,0 +1,66 @@
+<!-- Botón de cambio de tema con animaciones -->
+<button
+  type="button"
+  (click)="onToggleTheme()"
+  [title]="getNextThemeLabel()"
+  [disabled]="isAnimating"
+  class="theme-toggle-btn relative p-2.5 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500/50 group"
+  [class]="'bg-white/80 hover:bg-white dark:bg-gray-800/80 dark:hover:bg-gray-700 shadow-lg hover:shadow-xl border border-gray-200/50 dark:border-gray-600/50'"
+>
+  <!-- Contenedor del ícono con animación de rotación -->
+  <div 
+    class="icon-container relative w-5 h-5 transition-transform duration-300"
+    [class.animate-spin]="isAnimating"
+  >
+    <!-- Ícono SVG dinámico -->
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      class="w-5 h-5 text-gray-700 dark:text-gray-200 transition-colors duration-300" 
+      fill="none" 
+      viewBox="0 0 24 24" 
+      stroke="currentColor" 
+      stroke-width="2"
+    >
+      <path 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        [attr.d]="getThemeIcon()"
+      />
+    </svg>
+
+    <!-- Indicador de tema activo -->
+    <div 
+      class="absolute -top-1 -right-1 w-3 h-3 rounded-full transition-all duration-300"
+      [ngClass]="{
+        'bg-yellow-400 animate-pulse': currentTheme === 'light',
+        'bg-blue-600 animate-pulse': currentTheme === 'dark',
+        'bg-gradient-to-r from-yellow-400 to-blue-600': currentTheme === 'system'
+      }"
+    ></div>
+  </div>
+
+  <!-- Tooltip con información del tema actual -->
+  <div 
+    class="tooltip absolute -top-12 left-1/2 transform -translate-x-1/2 px-3 py-1.5 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs font-medium rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50"
+  >
+    {{ getThemeLabel() }}
+    <!-- Flecha del tooltip -->
+    <div 
+      class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-100"
+    ></div>
+  </div>
+
+  <!-- Efecto de ripple al hacer clic -->
+  <div 
+    class="ripple-effect absolute inset-0 rounded-xl opacity-0 bg-blue-500/20 transition-all duration-300 pointer-events-none"
+    [class.animate-ping]="isAnimating"
+  ></div>
+</button>
+
+<!-- Información de debug en modo desarrollo -->
+<div 
+  *ngIf="false" 
+  class="mt-2 text-xs text-gray-500 dark:text-gray-400"
+>
+  Tema: {{ currentTheme }} | Oscuro: {{ isDarkMode }}
+</div>

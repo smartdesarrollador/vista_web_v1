@@ -1,0 +1,146 @@
+/* Theme Toggle Component Styles */
+
+.theme-toggle-btn {
+  position: relative;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.theme-toggle-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Animación del ícono */
+.icon-container {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle-btn:hover .icon-container {
+  transform: rotate(15deg);
+}
+
+/* Efecto de pulso para el indicador */
+@keyframes theme-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* Animación del ripple */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.ripple-effect.animate-ping {
+  animation: ripple 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tooltip mejorado */
+.tooltip {
+  font-size: 0.75rem;
+  line-height: 1;
+  white-space: nowrap;
+  transform: translateX(-50%) translateY(-4px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.group:hover .tooltip {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Estados específicos del tema */
+.theme-toggle-btn[data-theme="light"] {
+  background: linear-gradient(135deg, #fef3c7, #fbbf24);
+  color: #92400e;
+}
+
+.theme-toggle-btn[data-theme="dark"] {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  color: #dbeafe;
+}
+
+.theme-toggle-btn[data-theme="system"] {
+  background: linear-gradient(135deg, #6b7280, #9ca3af);
+  color: #f9fafb;
+}
+
+/* Animaciones de entrada */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.theme-toggle-btn {
+  animation: fadeInScale 0.3s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .theme-toggle-btn {
+    padding: 0.625rem;
+  }
+  
+  .tooltip {
+    display: none; /* Ocultar tooltip en móviles para evitar problemas */
+  }
+}
+
+/* Mejoras de accesibilidad */
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  transform: translateY(-1px);
+}
+
+/* Animación para reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-btn,
+  .icon-container,
+  .tooltip,
+  .ripple-effect {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .theme-toggle-btn:hover {
+    transform: none !important;
+  }
+}
+
+/* Dark mode specific adjustments */
+@media (prefers-color-scheme: dark) {
+  .theme-toggle-btn {
+    border-color: rgba(75, 85, 99, 0.3);
+  }
+}

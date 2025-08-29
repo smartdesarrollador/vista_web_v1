@@ -1,0 +1,280 @@
+<!-- Galería/Catálogo - Página moderna con filtros y modal -->
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-blue-900/20 dark:to-indigo-900/30">
+  
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-indigo-600/10"></div>
+    <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full filter blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/20 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="animate-fade-in-up">
+        <h1 class="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-white dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent mb-6">
+          Nuestra Galería
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
+          Explora nuestro catálogo de proyectos exitosos y descubre cómo hemos ayudado a nuestros clientes a alcanzar sus objetivos digitales.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Buttons -->
+  <section class="relative -mt-10 mb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap justify-center gap-4 p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 dark:border-gray-700/30">
+        <!-- All Categories Button -->
+        <button
+          (click)="filterByCategory('all')"
+          [class.active]="selectedCategory === 'all'"
+          class="filter-btn px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:scale-105"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+          </svg>
+          Todos los Proyectos
+        </button>
+
+        <!-- Category Buttons -->
+        <button
+          *ngFor="let category of categories"
+          (click)="filterByCategory(category.name)"
+          [class.active]="selectedCategory === category.name"
+          class="filter-btn px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:scale-105"
+        >
+          <ng-container [ngSwitch]="category.icon">
+            <!-- Web Development -->
+            <svg *ngSwitchCase="'globe'" class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+            </svg>
+            
+            <!-- Mobile Apps -->
+            <svg *ngSwitchCase="'smartphone'" class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z"></path>
+            </svg>
+
+            <!-- E-commerce -->
+            <svg *ngSwitchCase="'shopping-cart'" class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v4a2 2 0 01-2 2H9a2 2 0 01-2-2v-4m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"></path>
+            </svg>
+
+            <!-- UI/UX Design -->
+            <svg *ngSwitchCase="'palette'" class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM7 3H5a2 2 0 00-2 2v12a4 4 0 004 4h2a2 2 0 002-2V5a2 2 0 00-2-2z"></path>
+            </svg>
+
+            <!-- Default icon -->
+            <svg *ngSwitchDefault class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+          </ng-container>
+          {{ category.name }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Grid -->
+  <section class="pb-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let i of [1,2,3,4,5,6]" class="animate-pulse">
+          <div class="bg-gray-200 dark:bg-gray-700 rounded-2xl h-80"></div>
+          <div class="mt-4 space-y-3">
+            <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded"></div>
+            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery Items -->
+      <div *ngIf="!isLoading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          *ngFor="let item of filteredItems; trackBy: trackByItem"
+          class="gallery-card group cursor-pointer transform transition-all duration-500 hover:scale-105"
+          (click)="openModal(item)"
+        >
+          <!-- Image Container -->
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group-hover:shadow-2xl transition-shadow duration-300">
+            <img
+              [src]="item.images[0]"
+              [alt]="item.title"
+              class="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
+              loading="lazy"
+            >
+            
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="absolute bottom-6 left-6 right-6">
+                <div class="flex flex-wrap gap-2 mb-3">
+                  <span
+                    *ngFor="let tech of item.technologies.slice(0, 3)"
+                    class="px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-medium"
+                  >
+                    {{ tech }}
+                  </span>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                  <span class="text-white font-medium">Ver Proyecto</span>
+                  <svg class="w-5 h-5 text-white transform transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="pt-6">
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-sm font-medium rounded-full">
+                {{ item.category }}
+              </span>
+              
+              <span *ngIf="item.isFeatured" class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 text-sm font-medium rounded-full">
+                Destacado
+              </span>
+            </div>
+            
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              {{ item.title }}
+            </h3>
+            
+            <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+              {{ item.shortDescription }}
+            </p>
+            
+            <div class="mt-4 flex items-center text-sm text-gray-500 dark:text-gray-400">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              {{ item.completedDate | date:'MMM yyyy' }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="!isLoading && filteredItems.length === 0" class="text-center py-20">
+        <svg class="mx-auto h-16 w-16 text-gray-400 dark:text-gray-500 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+        </svg>
+        <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-2">No hay proyectos en esta categoría</h3>
+        <p class="text-gray-600 dark:text-gray-300">Prueba seleccionando una categoría diferente.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Project Modal -->
+<div
+  *ngIf="isModalOpen && selectedItem"
+  class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+  (click)="closeModal()"
+>
+  <div
+    class="bg-white dark:bg-gray-800 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transform transition-all duration-300 scale-100"
+    (click)="$event.stopPropagation()"
+  >
+    <!-- Modal Header -->
+    <div class="sticky top-0 bg-white dark:bg-gray-800 p-6 border-b border-gray-200 dark:border-gray-700 rounded-t-3xl">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{ selectedItem.title }}</h2>
+          <p class="text-gray-600 dark:text-gray-300 mt-1">{{ selectedItem.category }}</p>
+        </div>
+        
+        <button
+          (click)="closeModal()"
+          class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors"
+        >
+          <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Modal Content -->
+    <div class="p-6">
+      <!-- Images Gallery -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+        <img
+          *ngFor="let image of selectedItem.images"
+          [src]="image"
+          [alt]="selectedItem.title"
+          class="w-full h-64 object-cover rounded-xl shadow-md"
+          loading="lazy"
+        >
+      </div>
+
+      <!-- Project Details -->
+      <div class="space-y-6">
+        <!-- Description -->
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Descripción del Proyecto</h3>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">{{ selectedItem.description }}</p>
+        </div>
+
+        <!-- Technologies -->
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Tecnologías Utilizadas</h3>
+          <div class="flex flex-wrap gap-2">
+            <span
+              *ngFor="let tech of selectedItem.technologies"
+              class="px-3 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-sm font-medium rounded-lg"
+            >
+              {{ tech }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Project Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div *ngIf="selectedItem.clientName">
+            <h4 class="font-medium text-gray-900 dark:text-white mb-2">Cliente</h4>
+            <p class="text-gray-600 dark:text-gray-300">{{ selectedItem.clientName }}</p>
+          </div>
+
+          <div>
+            <h4 class="font-medium text-gray-900 dark:text-white mb-2">Fecha de Finalización</h4>
+            <p class="text-gray-600 dark:text-gray-300">{{ selectedItem.completedDate | date:'MMMM yyyy' }}</p>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <a
+            *ngIf="selectedItem.projectUrl"
+            [href]="selectedItem.projectUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium text-center transition-colors duration-200"
+          >
+            <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+            Ver Proyecto Online
+          </a>
+
+          <a
+            *ngIf="selectedItem.githubUrl"
+            [href]="selectedItem.githubUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex-1 bg-gray-800 hover:bg-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 text-white px-6 py-3 rounded-xl font-medium text-center transition-colors duration-200"
+          >
+            <svg class="w-5 h-5 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            Ver en GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,219 @@
+/* Galería Component Styles */
+
+/* Loading animation */
+.loading-spinner {
+  @apply animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600;
+}
+
+/* Filter buttons */
+.filter-btn {
+  @apply px-6 py-2 rounded-full border-2 transition-all duration-300 font-medium;
+}
+
+.filter-btn.active {
+  @apply bg-blue-600 text-white border-blue-600 shadow-lg;
+}
+
+.filter-btn:not(.active) {
+  @apply bg-white text-blue-600 border-blue-200 hover:border-blue-400 hover:bg-blue-50;
+}
+
+/* Gallery grid animations */
+.gallery-grid {
+  @apply grid gap-6;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Gallery item cards */
+.gallery-item {
+  @apply bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer;
+  animation: slideInUp 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.gallery-item:nth-child(1) { animation-delay: 0.1s; }
+.gallery-item:nth-child(2) { animation-delay: 0.2s; }
+.gallery-item:nth-child(3) { animation-delay: 0.3s; }
+.gallery-item:nth-child(4) { animation-delay: 0.4s; }
+.gallery-item:nth-child(5) { animation-delay: 0.5s; }
+.gallery-item:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes slideInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Image container */
+.image-container {
+  @apply relative h-48 overflow-hidden;
+}
+
+.gallery-image {
+  @apply w-full h-full object-cover transition-transform duration-300 hover:scale-105;
+}
+
+.image-overlay {
+  @apply absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-300;
+}
+
+.gallery-item:hover .image-overlay {
+  @apply opacity-100;
+}
+
+/* Technology tags */
+.tech-tag {
+  @apply inline-block bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full mr-2 mb-2;
+}
+
+/* Modal styles */
+.modal-backdrop {
+  @apply fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  @apply bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto;
+  animation: slideInScale 0.3s ease-out;
+}
+
+@keyframes slideInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Modal header */
+.modal-header {
+  @apply sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between z-10;
+}
+
+.close-btn {
+  @apply text-gray-400 hover:text-gray-600 transition-colors duration-200 text-2xl font-semibold;
+}
+
+/* Modal image carousel */
+.modal-image-container {
+  @apply relative h-64 md:h-96 overflow-hidden;
+}
+
+.modal-image {
+  @apply w-full h-full object-cover;
+}
+
+.image-nav-btn {
+  @apply absolute top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all duration-200;
+}
+
+.prev-btn {
+  @apply left-4;
+}
+
+.next-btn {
+  @apply right-4;
+}
+
+/* Modal content body */
+.modal-body {
+  @apply p-6 space-y-6;
+}
+
+/* Project links */
+.project-link {
+  @apply inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm font-medium;
+}
+
+.github-link {
+  @apply inline-flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition-colors duration-200 text-sm font-medium;
+}
+
+/* Category icon */
+.category-icon {
+  @apply w-5 h-5 mr-2 text-blue-600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-btn {
+    @apply px-4 py-2 text-sm;
+  }
+  
+  .modal-content {
+    @apply mx-2 rounded-lg;
+  }
+  
+  .modal-header {
+    @apply px-4 py-3;
+  }
+  
+  .modal-body {
+    @apply p-4 space-y-4;
+  }
+  
+  .modal-image-container {
+    @apply h-48;
+  }
+}
+
+/* Empty state */
+.empty-state {
+  @apply text-center py-16 text-gray-500;
+}
+
+.empty-state-icon {
+  @apply mx-auto h-16 w-16 text-gray-300 mb-4;
+}
+
+/* Fade transitions for category filtering */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+
+/* Custom scrollbar for modal */
+.modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
