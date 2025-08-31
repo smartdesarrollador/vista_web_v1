@@ -28,6 +28,24 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Hacer los enlaces del menú más oscuros cuando el navbar tiene scroll */
+.navbar-scrolled a {
+  color: #1f2937 !important;
+}
+
+.navbar-scrolled a:hover {
+  color: #3b82f6 !important;
+}
+
+/* Para modo oscuro */
+.dark .navbar-scrolled a {
+  color: #f9fafb !important;
+}
+
+.dark .navbar-scrolled a:hover {
+  color: #60a5fa !important;
+}
+
 /* Animaciones de entrada */
 @keyframes fadeInDown {
   from {

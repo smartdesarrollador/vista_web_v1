@@ -107,13 +107,20 @@ export class NavbarComponent implements OnInit {
   }
 
   cargarLogoUrl(): void {
-    if (this.configuraciones && this.configuraciones['logo_principal']) {
-      this.configuracionesService
-        .getImagenUrl('logo_principal')
-        .subscribe((url) => {
-          this.logoUrl = url;
-        });
-    }
+    // Comentado: lógica para obtener logo desde la base de datos
+    // if (this.configuraciones && this.configuraciones['logo_principal']) {
+    //   this.configuracionesService
+    //     .getImagenUrl('logo_principal')
+    //     .subscribe((url) => {
+    //       this.logoUrl = url;
+    //     });
+    // } else {
+    //   // Si no hay logo en la base de datos, usar imagen por defecto
+    //   this.logoUrl = 'assets/logo/mi-logo.png';
+    // }
+    
+    // Usar logo estático desde assets
+    this.logoUrl = 'assets/logo/mi-logo.png';
   }
 
   aplicarEstilos(): void {

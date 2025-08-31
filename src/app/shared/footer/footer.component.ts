@@ -101,20 +101,24 @@ export class FooterComponent implements OnInit {
   }
 
   cargarLogoUrl(): void {
-    if (this.configuraciones && this.configuraciones['logo_footer']) {
-      this.configuracionesService
-        .getImagenUrl('logo_footer')
-        .subscribe((url) => {
-          this.logoUrl = url;
-        });
-    } else if (this.configuraciones && this.configuraciones['logo_principal']) {
-      // Si no hay logo específico para el footer, usar el principal
-      this.configuracionesService
-        .getImagenUrl('logo_principal')
-        .subscribe((url) => {
-          this.logoUrl = url;
-        });
-    }
+    // Comentado: lógica para obtener logo desde la base de datos
+    // if (this.configuraciones && this.configuraciones['logo_footer']) {
+    //   this.configuracionesService
+    //     .getImagenUrl('logo_footer')
+    //     .subscribe((url) => {
+    //       this.logoUrl = url;
+    //     });
+    // } else if (this.configuraciones && this.configuraciones['logo_principal']) {
+    //   // Si no hay logo específico para el footer, usar el principal
+    //   this.configuracionesService
+    //     .getImagenUrl('logo_principal')
+    //     .subscribe((url) => {
+    //       this.logoUrl = url;
+    //     });
+    // }
+    
+    // Usar logo estático desde assets
+    this.logoUrl = 'assets/logo/mi-logo.png';
   }
 
   aplicarEstilos(): void {
